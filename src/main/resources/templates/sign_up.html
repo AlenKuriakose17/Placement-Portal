@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Placement Portal</title>
+</head>
+<body>
+<div>
+<h1>Placement Portal</h1>
+<h2>Sign Up</h2>
+<form action="#" th:action="@{/saveUser}" th:object="${signup}" method="POST">
+<input type="text" th:field="*{userName}" placeholder="User Name">
+<input type="password" th:field="*{userPassword}" placeholder="User Password">
+<input type="text" th:field="*{userRole}" placeholder="User Role">
+<input type="submit" value ="SignUp"/>
+</form>
+
+</div>
+</body>
+</html>
