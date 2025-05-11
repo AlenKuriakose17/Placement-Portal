@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Placement Portal</title>
+</head>
+<body>
+<div>
+<h1>Placement Portal</h1>
+
+<h2>Update Placement</h2>
+
+<form action="#" th:action="@{/savePlacementAdmin}" th:object="${addORupdate}" method="POST">
+<!-- Add hidden form field to handle update -->
+<input type="hidden" th:field="*{plId}" />
+
+<input type="text" th:field="*{plJobtitle}" placeholder="Job Title">
+<input type="text" th:field="*{plCompany}" placeholder="Company Name/Code"><br><br>
+<!-- Replace input with textarea for multiline description -->
+  <textarea th:field="*{plDesc}" placeholder="Desc" style="width:600px; height:200px;"></textarea><br><br>
+
+  <!-- Also use textarea for longer links if needed -->
+  <textarea th:field="*{plLink}" placeholder="Link" style="width:600px; height:100px;"></textarea><br><br>
+
+<button type="submit"> Update</button>
+</form>
+<a th:href = "@{/viewPlacementList}"> Back</a>
+</div>
+</body>
+</html>

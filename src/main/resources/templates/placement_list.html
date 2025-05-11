@@ -7,12 +7,10 @@
 <body>
 <h1>Placement Portal</h1>
 
-<a th:href = "@{/}"> Log Out</a>
-
 <div>
 <h1>Placement List</h1>
 
-
+ <a th:href = "@{/showNewPlacementForm}"> Add Placement </a>   
 
 <table border="1">
 <thead>
@@ -28,7 +26,11 @@
 <td th:text="${placement.plJobtitle}"></td>
 <td th:text="${placement.plCompany}"></td>
 <td>
-<a th:href="@{/showDetailed/{id}(id=${placement.plId})}">Details</a>
+ 
+ <a th:href="@{/showDetailed/{id}(id=${placement.plId})}">Details</a>
+ <a th:href="@{/placementUpdateForm/{id}(id=${placement.plId})}">Update</a>  
+ <a th:href="@{/deletePlacement/{id}(id=${placement.plId})}">Delete</a> 
+   
 </td>
 </tr>
 </tbody>

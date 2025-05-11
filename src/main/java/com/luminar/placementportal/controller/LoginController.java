@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.luminar.placementportal.model.LoginModel;
 import com.luminar.placementportal.service.LoginService;
+import com.luminar.placementportal.service.PlacementService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,6 +19,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService ;
+	
+	@Autowired
+	private PlacementService placementService;
 	
 	//Login
 	
@@ -39,12 +43,14 @@ public class LoginController {
 	}
 	
 	@GetMapping("/admin")
-	public String adminPage() {
+	public String adminPage(Model model) {
+		model.addAttribute("listUsers", loginService.getAllUsers());
 		return "admin";
 	}
 	
 	@GetMapping("/student")
-	public String studentPage() {
+	public String studentPage(Model model) {
+		model.addAttribute("listPlacements", placementService.getAllPlacements());
 		return "student";
 	}
 	
@@ -66,27 +72,42 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
+	
+	@GetMapping("/showNewUserForm")
+	public String showNewUserForm(Model model) {
+	    model.addAttribute("addupdate", new LoginModel()); // or whatever model class you're using
+	    return "add_user"; // Thymeleaf will render add_user.html
+	}
+	
+	
 	@GetMapping("/showFormForUpdate/{id}")
 	public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
 		// get employee from the service
 		LoginModel login = loginService.getUserById(id);
 		// set employee as a model attribute to pre-populate the form
-		model.addAttribute("login", login);
+		model.addAttribute("addupdate", login);
 		return "update_user";
+	}
+	
+	@PostMapping("/saveUserAdmin")
+	public String saveUserAdmin(@ModelAttribute("addupdate") LoginModel login) {
+// save User to database
+		loginService.saveUser(login);
+		return "redirect:/admin";
 	}
 	
 	@GetMapping("/deleteUser/{id}")
 	public String deleteUser(@PathVariable(value = "id") long id) {
 		// call delete user method
 		this.loginService.deleteUserById(id);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 	
-	@GetMapping("/viewUserList")
+  /*	@GetMapping("/viewUserList")
 	public String viewUserList(Model model) {
 		model.addAttribute("listUsers", loginService.getAllUsers());
 		return "admin";
-	}
+	} */
 	
 	
 }

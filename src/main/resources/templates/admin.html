@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+<title>::Placement Portal::</title>
 </head>
 <body>
+<h1>Placement Portal</h1>
 
+<a th:href = "@{/}"> Log Out</a>
+
+<div>
+<h1>Users List</h1>
+<a th:href = "@{/viewPlacementList}"> Placement List </a> 
+
+ <a th:href = "@{/showNewUserForm}"> Add User </a>  
+
+<table border="1">
+<thead>
+<tr>
+<th>User Name</th>
+<th>User Role</th>
+<th> Actions </th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="user : ${listUsers}">
+<td th:text="${user.userName}"></td>
+<td th:text="${user.userRole}"></td>
+<td>
+<a th:href="@{/showFormForUpdate/{id}(id=${user.userId})}">Update</a> 
+<a th:href="@{/deleteUser/{id}(id=${user.userId})}">Delete</a>
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </body>
 </html>

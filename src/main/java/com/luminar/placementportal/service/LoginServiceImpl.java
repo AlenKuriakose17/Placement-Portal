@@ -31,7 +31,7 @@ public class LoginServiceImpl implements LoginService{
         String role = login.getUserRole();
         if ("admin".equals(role)) {
             return "redirect:/admin";
-        } else if ("backofficer".equals(role)) {
+        } else if ("student".equals(role)) {
             return "redirect:/student";
         } else {
             return "redirect:/accessDenied";

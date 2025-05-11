@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Placement Portal</title>
+</head>
+<body>
+<div>
+<h1>Placement Portal</h1>
+
+<h2>Update User</h2>
+
+<form action="#" th:action="@{/saveUserAdmin}" th:object="${addupdate}" method="POST">
+<!-- Add hidden form field to handle update -->
+<input type="hidden" th:field="*{userId}" />
+<input type="text" th:field="*{userName}">
+<input type="text" th:field="*{userPassword}">
+<input type="text" th:field="*{userRole}">
+
+<button type="submit"> Update</button>
+</form>
+<a th:href = "@{/admin}"> Back</a>
+</div>
+</body>
+</html>
